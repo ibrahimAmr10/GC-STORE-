@@ -1,107 +1,74 @@
 
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GC STORE - شحن PUBG</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #1e1e2f;
-            color: #ffffff;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-        }
-        header {
-            background-color: #292942;
-            padding: 20px;
-            font-size: 24px;
-            font-weight: bold;
-            color: #00ffc8;
-        }
-        section {
-            padding: 20px;
-        }
-        .package {
-            background-color: #33334d;
-            border: 1px solid #444;
-            margin: 10px auto;
-            padding: 15px;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 400px;
-            text-align: right;
-        }
-        input, select, button {
-            display: block;
-            width: 90%;
-            max-width: 400px;
-            margin: 10px auto;
-            padding: 10px;
-            border-radius: 5px;
-            border: none;
-            font-size: 16px;
-        }
-        button {
-            background-color: #00ffc8;
-            color: #000;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        #paymentPage, #confirmationPage {
-            display: none;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GC STORE | شحن ببجي</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1e1e2f;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      color: #ffcc00;
+    }
+    form {
+      background: #2c2c3e;
+      padding: 20px;
+      border-radius: 10px;
+      display: inline-block;
+    }
+    input, select, button {
+      padding: 10px;
+      margin: 10px;
+      border: none;
+      border-radius: 5px;
+      width: 80%;
+    }
+    button {
+      background-color: #ffcc00;
+      color: black;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #e6b800;
+    }
+  </style>
 </head>
 <body>
+  <h1>🔥 GC STORE - شحن ببجي 🔥</h1>
+  <form id="gc-form">
+    <input type="text" name="playerName" placeholder="اسم اللاعب داخل اللعبة" required /><br/>
+    <input type="text" name="uid" placeholder="UID" required /><br/>
+    <select name="package" required>
+      <option value="">اختر الباقة</option>
+      <option value="60 UC - 55 EGP">60 UC - 55 EGP</option>
+      <option value="325 UC - 250 EGP">325 UC - 250 EGP</option>
+      <option value="660 UC - 500 EGP">660 UC - 500 EGP</option>
+      <option value="1500 UC - 1200 EGP">1500 UC - 1200 EGP</option>
+    </select><br/>
+    <button type="submit">التالي</button>
+  </form>
 
-<header>GC STORE - شحن PUBG</header>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    (function() {
+      emailjs.init("Rw7wYlpwZtobHbH5v");
+    })();
 
-<section id="mainPage">
-    <h2>اختر الباقة واملأ بياناتك</h2>
-    <select id="package">
-        <option value="60 UC - 55 EGP">60 UC - 55 جنيه</option>
-        <option value="325 UC - 250 EGP">325 UC - 250 جنيه</option>
-        <option value="660 UC - 500 EGP">660 UC - 500 جنيه</option>
-        <option value="1500 UC - 1200 EGP">1500 UC - 1200 جنيه</option>
-    </select>
-    <input type="text" id="uid" placeholder="اكتب الـ UID">
-    <input type="text" id="playerName" placeholder="اسم اللاعب">
-    <button onclick="goToPayment()">التالي</button>
-</section>
-
-<section id="paymentPage">
-    <h2>ادفع عبر فودافون كاش</h2>
-    <p>ارسل المبلغ المحدد إلى الرقم:</p>
-    <p style="font-size: 20px; font-weight: bold;">01061683694</p>
-    <p>ثم اضغط على الزر بالأسفل بعد الدفع</p>
-    <button onclick="confirmPayment()">تم الدفع</button>
-</section>
-
-<section id="confirmationPage">
-    <h2>شكراً! تم استلام طلبك</h2>
-    <p>سيتم تنفيذ الشحن خلال دقائق</p>
-</section>
-
-<script>
-    function goToPayment() {
-        const uid = document.getElementById("uid").value.trim();
-        const name = document.getElementById("playerName").value.trim();
-        if (uid === "" || name === "") {
-            alert("من فضلك املأ كل البيانات");
-            return;
-        }
-        document.getElementById("mainPage").style.display = "none";
-        document.getElementById("paymentPage").style.display = "block";
-    }
-
-    function confirmPayment() {
-        document.getElementById("paymentPage").style.display = "none";
-        document.getElementById("confirmationPage").style.display = "block";
-    }
-</script>
-
+    document.getElementById('gc-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      emailjs.sendForm('service_exl1onh', 'template_hcfc75g', this)
+        .then(function() {
+          window.location.href = "thanks.html";
+        }, function(error) {
+          alert("حصلت مشكلة في الإرسال: " + JSON.stringify(error));
+        });
+    });
+  </script>
 </body>
 </html>
