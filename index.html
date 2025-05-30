@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GC STORE | شحن ببجي</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1e1e2f;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      color: #ffcc00;
+    }
+    form {
+      background: #2c2c3e;
+      padding: 20px;
+      border-radius: 10px;
+      display: inline-block;
+    }
+    input, select, button {
+      padding: 10px;
+      margin: 10px;
+      border: none;
+      border-radius: 5px;
+      width: 80%;
+    }
+    button {
+      background-color: #ffcc00;
+      color: black;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #e6b800;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔥 GC STORE - شحن ببجي 🔥</h1>
+  <form id="gc-form">
+    <input type="text" name="playerName" placeholder="اسم اللاعب داخل اللعبة" required /><br/>
+    <input type="text" name="uid" placeholder="UID" required /><br/>
+    <select name="package" required>
+      <option value="">اختر الباقة</option>
+      <option value="60 UC - 55 EGP">60 UC - 55 EGP</option>
+      <option value="325 UC - 250 EGP">325 UC - 250 EGP</option>
+      <option value="660 UC - 500 EGP">660 UC - 500 EGP</option>
+      <option value="1500 UC - 1200 EGP">1500 UC - 1200 EGP</option>
+    </select><br/>
+    <button type="submit">التالي</button>
+  </form>
+
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    (function() {
+      emailjs.init("Rw7wYlpwZtobHbH5v");
+    })();
+
+    document.getElementById('gc-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      emailjs.sendForm('service_exl1onh', 'template_hcfc75g', this)
+        .then(function() {
+          window.location.href = "thanks.html";
+        }, function(error) {
+          alert("حصلت مشكلة في الإرسال: " + JSON.stringify(error));
+        });
+    });
+  </script>
+</body>
+</html>
